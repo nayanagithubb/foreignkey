@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+    body{
+        background-color: rgb(200, 215, 219);
+        background-image: url("https://i.pinimg.com/564x/87/69/17/876917ccc1af6f7ff7cf31bc70813f3a.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    h1{
+        color: rgb(23, 56, 99);
+    }
+    .demo{
+        color: rgba(224, 15, 102, 0.973);
+        
+    }
+  .card{
+    padding: 1.5em .5em .5em;
+    border-radius: 2em;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+   
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+        <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'add_course' %}">Add Course<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'add_student' %}">Add Student</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'show_student_details' %}">Show Student Details</a>
+              </li>
+
+
+           
+
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+      
+ 
+   <br><br><br>
+        
+       
+         <div class="container col-xl-4">
+
+            <div class="card" style="width: 23rem; background-color:rgb(211, 211, 211);">
+            
+                <h1 style="text-align: center;">Add Course</h1><br>
+    
+                {% for message in messages %}<h5>
+                  <div class="alert alert-danger mt-5">
+                      {{ message }}
+                  </div>
+              </h5>
+                {% endfor %}
+               
+
+                  
+    
+<form class="demo" method="post" action="{% url 'add_coursedb' %}">
+
+    {% csrf_token %}
+   
+   
+<div class="form-group col-md-12">
+     
+
+          
+           <input type="text" name="course_name" class="form-control" placeholder="Enter Course">
+          
+           
+</div>
+            
+         
+            <div class="form-group col-md-12">
+        
+          
+            <input type="number" name="course_fee" class="form-control" placeholder="Enter Course Fee">
+           
+    </div>
+    
+        
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 mt-2">
+          
+                <button type="submit"  class="btn btn-primary rounded-pill w-100">Submit</button>
+            </div>
+            <div class="col-md-4"></div>
+            </div><br>
+                             
+                
+ 
+    
+    </form>
+   
+ </div>
+ </div>
+ {% block content %} 
+ {% endblock %}
+
+    
+
+    
+    </body>
+    </html>   
+
+

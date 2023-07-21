@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+    body{
+        background-color: rgb(97, 99, 100);
+        background-image: url("");
+        background-repeat: no-repeat;
+        background-size: cover;
+        
+    }
+    h1{
+        color: rgb(240, 15, 45);
+    }
+    .demo{
+        color: rgba(212, 14, 64, 0.966);
+    }
+   
+</style>
+<body>
+    
+   
+    <div class="container mt-5">
+        <form enctype="multipart/form-data" method="post" action="{% url 'editdb' student.id %}" >
+             <h1 class="alert alert-dark text-center">Edit Student Details</h1>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+               {% csrf_token %}
+                <h2>Student Name</h2>
+                <input type="text" name="student_name" class="form-control mt-3" value="{{ student.student_name }}">
+                <h2>Student Address</h2>
+                <input type="text" name="student_address" class="form-control mt-3" value="{{ student.student_address }}">
+                <h2>Age</h2>
+                <input type="number" name="student_age" class="form-control mt-3" value="{{ student.student_age }}">
+                <h2>Joining Date</h2>
+                <input type="date" name="joining_date" class="form-control mt-3" value="{{ student.joining_date|date:'Y-m-d' }}">
+                <h2>Course</h2>
+                <select name="sel" class="form-control mt-3">
+                    {% for c in course %}
+                  {% if c.course_name == student.course.course_name %}
+                    <option value="{{c.id}}" selected>{{c.course_name}}</option>
+                   {% else %}
+                   <option value="{{c.id}}">{{c.course_name}}</option>
+                   {% endif %}
+                    {% endfor %}
+                    </select>
+                <h2>Course Fee</h2>
+                <input type="number" name="course_fee" class="form-control mt-3" value="{{ student.course.course_fee}}"><br>
+
+                <button type="submit" class="btn btn-success mt-3 w-100">Edit</button>
+            </form>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+         
+            
+{% block content %}
+{% endblock %}
+</body>
+</html>
